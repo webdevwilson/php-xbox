@@ -1,0 +1,20 @@
+PHP-Xbox
+------------------------------------------------------------------------------------------
+Run tests:
+
+php XboxGamercard.test.php
+
+
+Easy to use:
+
+include 'XboxGamercard.class.php'
+$gamercard = new XboxGamercard('Major Nelson');
+
+Method:
+refresh - refresh data
+
+Fields:
+html - the html of the gamercard
+subscription - Gold or Silver
+avatar - Paths to avatars (large, small, body)
+games - array containing 5 items (title, tile)

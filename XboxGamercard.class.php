@@ -9,6 +9,8 @@ class XboxGamercard {
 
     public $gamertag;
 
+    public $avatars;
+
     public $html;
 
     public $subscription;
@@ -31,6 +33,12 @@ class XboxGamercard {
         if($h === false) {
             throw new Exception("Invalid gamertag or service not available");
         }
+
+        $this->avatars = array(
+            'body' => "http://avatar.xboxlive.com/avatar/{$this->gamertag}/avatar-body.png",
+            'large' => "http://avatar.xboxlive.com/avatar/{$this->gamertag}/avatarpic-l.png",
+            'small' => "http://avatar.xboxlive.com/avatar/{$this->gamertag}/avatarpic-s.png"
+        );
 
         $this->html = $h;
         $this->subscription = stristr($h, "<span class=\"Gold\">") === false ?
