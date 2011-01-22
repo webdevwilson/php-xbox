@@ -34,15 +34,20 @@ class XboxGamercard {
             throw new Exception("Invalid gamertag or service not available");
         }
 
+        $this->html = $h;
+        $this->subscription = stristr($h, "<span class=\"Gold\">") === false ?
+                                SUBSCRIPTION_SILVER : SUBSCRIPTION_GOLD;
+
+        $re = '/<img class="GamerPic" width="64" height="64" src="(.+)" alt=".*" /';
+        preg_match($re, $h, $m);
+
         $this->avatars = array(
+            'tile' => $m[1],
             'body' => "http://avatar.xboxlive.com/avatar/{$this->gamertag}/avatar-body.png",
             'large' => "http://avatar.xboxlive.com/avatar/{$this->gamertag}/avatarpic-l.png",
             'small' => "http://avatar.xboxlive.com/avatar/{$this->gamertag}/avatarpic-s.png"
         );
 
-        $this->html = $h;
-        $this->subscription = stristr($h, "<span class=\"Gold\">") === false ?
-                                SUBSCRIPTION_SILVER : SUBSCRIPTION_GOLD;
 
         $this->gamerscore = preg_match('/<div class="Stat">([0-9]+)<\/div>/', $h, $m);
         $this->gamerscore = intval($m[1]);
